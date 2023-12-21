@@ -6,6 +6,13 @@ const seeVegetarian = document.querySelector("#seeVegetarian");
 const list = document.querySelector('ul')
 const resultSumEWithDiscount = document.querySelector('#total_price_with_discount')
 
+// formatar o número para moeda brasileira
+
+const formatCurrency = (value) => {
+    const newValue = value.toLocaleString('pt-br', {style:'currency', currency: 'BRL'})
+    return newValue
+}
+
 // forEach ->> Mostrar todos os produtos
 
 let myLi = ''
@@ -20,7 +27,7 @@ const showAll = (productsArray) => {
             <li>
                 <img src=${product.src} />
                 <p>${product.name}</p>
-                <p class="item_price">R$ ${product.price}</p>
+                <p class="item_price">R$ ${formatCurrency(product.price)}</p>
             </li>
         `
     });
@@ -57,8 +64,8 @@ const totalSum = () => {
 
     resultSumEWithDiscount.style.display = 'block'
     resultSumEWithDiscount.innerHTML = `
-        A soma total dos produtos fica em R$ ${totalPrice}<br> 
-        Com desconto de 10% você pagará um total de R$ ${fullDiscountedPrice}
+        A soma total dos produtos fica em R$ ${formatCurrency(totalPrice)}<br> 
+        Com desconto de 10% você pagará um total de R$ ${formatCurrency(fullDiscountedPrice)}
     `
 }
 
